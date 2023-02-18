@@ -1,0 +1,47 @@
+@import './base.css';
+
+#app {
+  width: 100%;
+  font-weight: normal;
+}
+
+a,
+.green {
+  text-decoration: none;
+  color: hsla(160, 100%, 37%, 1);
+  transition: 0.4s;
+}
+.btn:hover {
+  box-shadow: inset 0 0 0 20rem rgb(0 0 0 / 6%);
+}
+.btn {
+  font-family: inherit;
+  font-size: .875rem;
+  font-weight: 700;
+  font-weight: 500;
+  cursor: pointer;
+  display: inline-block;
+  line-height: 1.125rem;
+  padding: 0.5rem 1rem;
+  margin: 0;
+  height: auto;
+  border: 1px solid transparent;
+  vertical-align: middle;
+  -webkit-appearance: none;
+  color: inherit;
+  background-color: transparent;
+  border-radius: 3px;
+  text-decoration: none;
+}
+button.btn.primary {
+  background-color: #0074d9;
+  color: #fff;
+  background-color: #0074d9;
+
+}
+
+@media (hover: hover) {
+  a:hover {
+    background-color: hsla(160, 100%, 37%, 0.2);
+  }
+}
