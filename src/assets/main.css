@@ -18,8 +18,9 @@
   font-size: .875rem;
   font-weight: 700;
   font-weight: 500;
+  display: flex;
+  align-items: center;
   cursor: pointer;
-  display: inline-block;
   line-height: 1.125rem;
   padding: 0.5rem 1rem;
   margin: 0;
@@ -32,12 +33,17 @@
   border-radius: 3px;
   text-decoration: none;
 }
-button.btn.primary {
+button.btn.login {
   background-color: #0074d9;
   color: #fff;
-  background-color: #0074d9;
 }
-
+button.btn.primary {
+  background-color: #383838;
+  color: #fff;
+}
+button.btn .icon {
+margin-right: 5px;
+}
 @media (hover: hover) {
   a:hover {
     background-color: hsla(160, 100%, 37%, 0.2);

@@ -28,6 +28,7 @@ export default {
             const userStore = useUserStore()
             userStore.logout();
             const messageStore = useMessageStore();
+            this.redirect('/');
             messageStore.success("You have been logged out");
         },
         redirect(route) {
