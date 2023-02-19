@@ -17,6 +17,14 @@ const router = createRouter({
                 guest: false
             },
             component: () => import('../views/Inventory.vue')
+        },
+        {
+            path: '/settings',
+            name: 'settings',
+            meta: {
+                guest: false
+            },
+            component: () => import('../views/Settings.vue')
         }
     ]
 })

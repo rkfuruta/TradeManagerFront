@@ -32,14 +32,18 @@ export default  {
     display: flex;
     width: 100%;
     justify-content: space-between;
-    padding-left: 20px;
+    align-items: center;
+    padding: 0 20px;
 }
 .nav-bar .main {
     display: flex;
 }
 .nav-bar .item {
-    margin-right: 50px;
     padding: 20px;
+    cursor: pointer;
+}
+.nav-bar .item:hover {
+    background-color: #181818;
 }
 .nav-bar .user-header {
     display: flex;
