@@ -52,4 +52,9 @@ export default {
     font-size: 30px;
     font-weight: bold;
 }
+.items-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+}
 </style>
