@@ -90,4 +90,8 @@ export default {
     .fieldset input:focus-visible {
         outline: none;
     }
+    .btn.login {
+        display: flex;
+        justify-content: center;
+    }
 </style>

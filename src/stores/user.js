@@ -1,5 +1,6 @@
 import { defineStore } from 'pinia'
 import axios from "axios";
+import { isJwtExpired } from 'jwt-check-expiration';
 
 export const useUserStore = defineStore('user', {
     state: () => ({
@@ -19,6 +20,10 @@ export const useUserStore = defineStore('user', {
             this.user = user;
         },
         isLoggedIn() {
+            if (isJwtExpired(this.user.token)) {
+                this.logout();
+                return false;
+            }
             return (this.user);
         },
         logout() {
