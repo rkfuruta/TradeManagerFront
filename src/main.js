@@ -7,9 +7,9 @@ import router from './router'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 
-import { faRotate } from '@fortawesome/free-solid-svg-icons'
+import {faRotate, faCoins, faLock, faLockOpen, faWallet} from '@fortawesome/free-solid-svg-icons'
 
-library.add(faRotate)
+library.add(faRotate, faCoins, faLock, faLockOpen, faWallet)
 
 import './assets/main.css'
 

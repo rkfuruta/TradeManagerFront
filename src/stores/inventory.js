@@ -29,6 +29,10 @@ export const useInventoryStore = defineStore('inventory', {
                 this.inventory = result.data.data.inventory;
                 this.updated_at = moment();
             }
+        },
+        updateItem(id, item) {
+            const key = this.inventory.items.findIndex(inventory_item => inventory_item.entity_id === id);
+            this.inventory.items[key] = item;
         }
     },
     persist: true

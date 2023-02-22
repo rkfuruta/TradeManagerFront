@@ -30,19 +30,20 @@ const router = createRouter({
 })
 
 router.beforeEach((to, from, next) => {
+    const userStore = useUserStore();
     if (to.matched.some(record => {
         if (record.meta.guest !== undefined && !record.meta.guest) {
             return true;
         }
         return false;
     })) {
-        const userStore = useUserStore();
         if (!userStore.isLoggedIn()) {
             router.push("/");
         } else {
             next();
         }
     } else {
+        userStore.checkToken();
         next();
     }
 })

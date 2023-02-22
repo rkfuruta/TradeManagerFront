@@ -2,12 +2,10 @@
     <main>
         <div class="header">
             <div class="title">Inventory</div>
-            <div class="actions">
-                <button class="btn primary" @click="reload">
-                    <font-awesome-icon icon="fa-solid fa-rotate" class="icon" />
-                    <span>Reload</span>
-                </button>
-            </div>
+            <button class="btn primary" @click="reload">
+                <font-awesome-icon icon="fa-solid fa-rotate" class="icon" />
+                <span>Reload</span>
+            </button>
         </div>
         <div class="items-wrapper" v-if="inventory && inventory.items">
             <div v-for="item in inventory.items">
@@ -47,6 +45,7 @@ export default {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    padding-bottom: 2rem;
 }
 .header .title {
     font-size: 30px;

@@ -20,11 +20,14 @@ export const useUserStore = defineStore('user', {
             this.user = user;
         },
         isLoggedIn() {
-            if (isJwtExpired(this.user.token)) {
+            this.checkToken();
+            return (this.user);
+        },
+        checkToken() {
+            if (this.user && isJwtExpired(this.user.token)) {
                 this.logout();
                 return false;
             }
-            return (this.user);
         },
         logout() {
             this.user = null;
