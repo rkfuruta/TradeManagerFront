@@ -34,14 +34,12 @@ import Transaction from "@/components/dashboard/Transaction.vue";
         <div class="item">
             <div class="title">Average Profit %</div>
             <div class="value">
-                <font-awesome-icon icon="fa-solid fa-coins" class="icon coins" />
                 {{ averageProfitPercent }}
             </div>
         </div>
         <div class="item">
             <div class="title">Profit %</div>
             <div class="value">
-                <font-awesome-icon icon="fa-solid fa-coins" class="icon coins" />
                 {{ profitPercent }}
             </div>
         </div>
@@ -231,5 +229,6 @@ export default {
     display: flex;
     align-items: center;
     justify-content: center;
+    font-weight: bold;
 }
 </style>
