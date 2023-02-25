@@ -17,8 +17,10 @@
     "dotenv": "^16.0.3",
     "jwt-check-expiration": "^1.0.5",
     "moment": "^2.29.4",
+    "moment-timezone": "^0.5.40",
     "pinia": "^2.0.30",
     "pinia-plugin-persistedstate": "^3.1.0",
+    "underscore": "^1.13.6",
     "vue": "^3.2.45",
     "vue-router": "^4.1.6",
     "vuex-persistedstate": "^4.1.0"
