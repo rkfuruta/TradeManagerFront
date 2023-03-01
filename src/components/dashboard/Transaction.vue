@@ -68,6 +68,10 @@ export default {
             let hours = tradelock.diff(now, "hours");
             let minutes = tradelock.diff(now, "minutes");
             minutes = minutes - (hours*60);
+            if (minutes < 0) {
+                this.transaction.tradelock = null;
+                return null;
+            }
             hours = hours - (days*24)
             if (minutes > 0 && hours > 0) {
                 hours++;
