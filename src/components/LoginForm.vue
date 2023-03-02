@@ -12,6 +12,9 @@
             </div>
             <div class="actions">
                 <button class="btn login" type="submit">Login</button>
+                <button class="btn login steam" type="button" @click="steam">
+                    <img src="https://community.akamai.steamstatic.com/public/shared/images/header/logo_steam.svg?t=962016">
+                </button>
             </div>
         </form>
     </div>
@@ -43,6 +46,9 @@ export default {
                     messageStore.error(err.response.data.message);
                 }
             });
+        },
+        steam() {
+            window.location.href = '/api/v1/steam/login';
         }
     }
 }
@@ -69,7 +75,14 @@ export default {
         margin-bottom: 15px;
     }
     .actions {
-        margin: 40px 0 20px 0;
+        margin-top: 40px;
+    }
+    .actions .steam {
+        margin-top: 40px;
+        background-color: #171a21;
+    }
+    .actions .steam img {
+        max-height: 25px;
     }
     .fieldset label,
     .fieldset input,
@@ -91,6 +104,7 @@ export default {
         outline: none;
     }
     .btn.login {
+        height: 40px;
         display: flex;
         justify-content: center;
     }

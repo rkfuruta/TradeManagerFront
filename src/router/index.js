@@ -31,6 +31,12 @@ const router = createRouter({
 
 router.beforeEach((to, from, next) => {
     const userStore = useUserStore();
+    if (to.query.hasOwnProperty("token")) {
+        if (!userStore.isLoggedIn()) {
+            userStore.loginByToken(to.query.token);
+        }
+        router.push("/");
+    }
     if (to.matched.some(record => {
         if (record.meta.guest !== undefined && !record.meta.guest) {
             return true;
@@ -46,6 +52,6 @@ router.beforeEach((to, from, next) => {
         userStore.checkToken();
         next();
     }
-})
+});
 
 export default router
