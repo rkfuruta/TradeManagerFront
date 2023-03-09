@@ -19,6 +19,14 @@ const router = createRouter({
             component: () => import('../views/Inventory.vue')
         },
         {
+            path: '/bot',
+            name: 'bot',
+            meta: {
+                guest: false
+            },
+            component: () => import('../views/Bot.vue')
+        },
+        {
             path: '/settings',
             name: 'settings',
             meta: {

@@ -7,6 +7,9 @@
             <div class="item inventory" @click="redirect('/inventory')">
                 <span>Inventory</span>
             </div>
+            <div class="item bot" @click="redirect('/bot')">
+                <span>Bot</span>
+            </div>
         </div>
         <UserHeader class="user-header" />
     </div>
