@@ -1,5 +1,5 @@
 <template>
-    <div class="actions">
+    <div class="console-actions">
         <div class="debug">
             <label>Show debug</label>
             <input type="checkbox" v-model="debug">
@@ -78,12 +78,12 @@ export default {
 }
 </script>
 <style scoped>
-.actions {
+.console-actions {
     display: flex;
     justify-content: end;
     margin-bottom: 10px;
 }
-.actions .debug label {
+.console-actions .debug label {
     padding-right: 10px;
 }
 .console {
