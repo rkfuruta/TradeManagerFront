@@ -23,6 +23,7 @@ export const useUserStore = defineStore('user', {
         },
         token() {
             if (this.user) {
+                this.checkToken();
                 return this.user.token;
             }
             return null;
