@@ -1,7 +1,7 @@
 <template>
     <div class="console-actions">
         <button class="btn primary filters" @click="toggleFilters">Filters</button>
-        <div class="filters-wrapper" v-show="this.filters.show">
+        <div class="filters-wrapper" v-show="filters">
             <div class="filter-options-wrapper">
                 <div class="multiselect-code-wrapper fieldset filter-option">
                     <label>Code</label>
@@ -59,9 +59,7 @@ export default {
             logs: [],
             interval: null,
             last_id: null,
-            filters: {
-                show: false
-            }
+            filters: false
         }
     },
     mounted() {
@@ -104,7 +102,7 @@ export default {
             return filters;
         },
         toggleFilters(){
-            this.filters.show = !this.filters.show;
+            this.filters = !this.filters;
         },
         applyFilters() {
             filtersStore.bot.filters.filter = true;
