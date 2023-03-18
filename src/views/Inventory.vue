@@ -8,7 +8,7 @@
             </button>
         </div>
         <div class="items-wrapper" v-if="inventory && inventory.items">
-            <div v-for="item in inventory.items">
+            <div class="inventory-item-container" v-for="item in inventory.items">
                 <Item :item="item" />
             </div>
         </div>
@@ -55,5 +55,10 @@ export default {
     display: flex;
     flex-wrap: wrap;
     gap: 15px;
+}
+@media only screen and (max-width: 450px) {
+    .inventory-item-container {
+        width: 100%;
+    }
 }
 </style>

@@ -25,14 +25,14 @@ import Transaction from "@/components/dashboard/Transaction.vue";
             </div>
         </div>
         <div class="item">
-            <div class="title">Average Profit</div>
+            <div class="title">Avg. Profit</div>
             <div class="value">
                 <font-awesome-icon icon="fa-solid fa-coins" class="icon coins" />
                 {{ averageProfit }}
             </div>
         </div>
         <div class="item">
-            <div class="title">Average Profit %</div>
+            <div class="title">Avg. Profit %</div>
             <div class="value">
                 {{ averageProfitPercent }}
             </div>
@@ -44,27 +44,29 @@ import Transaction from "@/components/dashboard/Transaction.vue";
             </div>
         </div>
     </div>
-    <div class="list" v-if="transactions">
+    <div class="list-wrapper">
         <div class="data selector">
             <select name="transaction_dates" @change="changeDates($event)">
                 <option v-for="date in dates">{{ getFormatedMonth(date) }}/{{ date.Year}}</option>
             </select>
         </div>
-        <table class="transaction-wrapper">
-            <tr>
-                <th>Item</th>
-                <th>Purchase Date</th>
-                <th>Purchase Value</th>
-                <th>Sold Date</th>
-                <th>Sold Value</th>
-                <th>Profit</th>
-                <th>Profit %</th>
-                <th>Days selling</th>
-            </tr>
-            <tr v-for="transaction in transactions">
-                <Transaction :transaction="transaction" />
-            </tr>
-        </table>
+        <div class="list" v-if="transactions">
+            <table class="transaction-wrapper">
+                <tr>
+                    <th>Item</th>
+                    <th>Purchase Date</th>
+                    <th>Purchase Value</th>
+                    <th>Sold Date</th>
+                    <th>Sold Value</th>
+                    <th>Profit</th>
+                    <th>Profit %</th>
+                    <th>Days selling</th>
+                </tr>
+                <tr v-for="transaction in transactions">
+                    <Transaction :transaction="transaction" />
+                </tr>
+            </table>
+        </div>
     </div>
 </template>
 <script>
@@ -230,5 +232,10 @@ export default {
     align-items: center;
     justify-content: center;
     font-weight: bold;
+}
+@media only screen and (max-width: 450px) {
+    .statistics {
+        justify-content: space-evenly;
+    }
 }
 </style>

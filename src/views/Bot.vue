@@ -32,7 +32,7 @@
     <div class="console">
         <div v-for="log in logs" class="message" :class="log.code">
             <span class="timestamp">[{{ formatDate(log.createdAt) }}]</span>
-            <span class="message" :class="log.code">{{log.message}}</span>
+            <span class="content" :title="log.message" :class="log.code">{{log.message}}</span>
         </div>
     </div>
 </template>
@@ -153,6 +153,9 @@ export default {
     padding-left: 5px;
     content: "-";
 }
+.message {
+    overflow: hidden;
+}
 .message.blue {
     color: blue;
 }
@@ -207,6 +210,11 @@ export default {
     color: rgba(235, 235, 235, 0.64);
     border-radius: 4px;
     padding: 10px;
+}
+@media only screen and (max-width: 450px) {
+    .filter-option {
+        width: 100%;
+    }
 }
 </style>
 <style src="@vueform/multiselect/themes/default.css"></style>

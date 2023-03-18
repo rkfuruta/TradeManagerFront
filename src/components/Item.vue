@@ -214,4 +214,9 @@ export default {
 .sell_value .amount::after {
     content: "-";
 }
+@media only screen and (max-width: 450px) {
+    .item-wrapper {
+        width: 100%;
+    }
+}
 </style>
