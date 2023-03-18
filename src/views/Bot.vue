@@ -3,7 +3,7 @@
         <button class="btn primary filters" @click="toggleFilters">Filters</button>
         <div class="filters-wrapper" v-show="filters.show">
             <div class="filter-options-wrapper">
-                <div class="multiselect-code-wrapper filter-option">
+                <div class="multiselect-code-wrapper fieldset filter-option">
                     <label>Code</label>
                     <Multiselect
                         class="multiselect-code"
@@ -14,11 +14,11 @@
                         :close-on-select="false"
                     />
                 </div>
-                <div class="limit filter-option">
+                <div class="limit fieldset filter-option">
                     <label>Limit</label>
                     <input v-model="filters.limit">
                 </div>
-                <div class="debug filter-option">
+                <div class="debug fieldset filter-option">
                     <label>Show debug</label>
                     <input type="checkbox" v-model="filters.debug">
                 </div>

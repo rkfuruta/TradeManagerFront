@@ -44,3 +44,6 @@ button.btn.primary {
 button.btn .icon {
 margin-right: 5px;
 }
+.fieldset input {
+  font-size: 16px;
+}

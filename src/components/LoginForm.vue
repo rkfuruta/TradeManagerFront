@@ -10,7 +10,7 @@
             <div class="fieldset">
                 <input type="password" id="password" v-model="password" placeholder="Password">
             </div>
-            <div class="actions">
+            <div class="login-actions">
                 <button class="btn login" type="submit">Login</button>
                 <button class="btn login steam" type="button" @click="steam">
                     <img src="https://community.akamai.steamstatic.com/public/shared/images/header/logo_steam.svg?t=962016">
@@ -74,19 +74,19 @@ export default {
         flex-wrap: wrap;
         margin-bottom: 15px;
     }
-    .actions {
+    .login-actions {
         margin-top: 40px;
     }
-    .actions .steam {
+    .login-actions .steam {
         margin-top: 40px;
         background-color: #171a21;
     }
-    .actions .steam img {
+    .login-actions .steam img {
         max-height: 25px;
     }
     .fieldset label,
     .fieldset input,
-    .actions button {
+    .login-actions button {
         width: 100%;
     }
     .fieldset label {
