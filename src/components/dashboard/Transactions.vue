@@ -32,9 +32,10 @@ import Transaction from "@/components/dashboard/Transaction.vue";
             </div>
         </div>
         <div class="item">
-            <div class="title">Avg. Profit %</div>
+            <div class="title">Items Value</div>
             <div class="value">
-                {{ averageProfitPercent }}
+                <font-awesome-icon icon="fa-solid fa-coins" class="icon coins" />
+                {{ itemsValue }}
             </div>
         </div>
         <div class="item">
@@ -151,21 +152,17 @@ export default {
             });
             return this.formatCurrency(total/amount);
         },
-        averageProfitPercent() {
+        itemsValue() {
             let total = 0;
-            let profit = 0;
-            let amount = 0;
             _.each(this.transactions, (transaction) => {
-                if (transaction.sell_value) {
+                if (transaction.purchase_value && !transaction.sell_value) {
                     total += transaction.purchase_value;
-                    amount++;
-                    profit += transaction.sell_value - transaction.purchase_value;
                 }
             });
             if (total <= 0) {
                 return 0;
             }
-            return ((profit/amount)*100/total).toFixed(2) + "%";
+            return this.formatCurrency(total);
         },
         profitPercent() {
             let total = 0;
