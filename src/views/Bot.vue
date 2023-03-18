@@ -1,14 +1,14 @@
 <template>
     <div class="console-actions">
         <button class="btn primary filters" @click="toggleFilters">Filters</button>
-        <div class="filters-wrapper" v-show="filters.show">
+        <div class="filters-wrapper" v-show="this.filters.show">
             <div class="filter-options-wrapper">
                 <div class="multiselect-code-wrapper fieldset filter-option">
                     <label>Code</label>
                     <Multiselect
                         class="multiselect-code"
-                        v-model="filters.code.value"
-                        :options="filters.code.options"
+                        v-model="bot.filters.code.value"
+                        :options="bot.filters.code.options"
                         :mode="'multiple'"
                         :hideSelected="false"
                         :close-on-select="false"
@@ -16,11 +16,11 @@
                 </div>
                 <div class="limit fieldset filter-option">
                     <label>Limit</label>
-                    <input v-model="filters.limit">
+                    <input v-model="bot.filters.limit">
                 </div>
                 <div class="debug fieldset filter-option">
                     <label>Show debug</label>
-                    <input type="checkbox" v-model="filters.debug">
+                    <input type="checkbox" v-model="bot.filters.debug">
                 </div>
             </div>
             <div class="filter-actions">
@@ -36,11 +36,20 @@
         </div>
     </div>
 </template>
+<script setup>
+import { useFiltersStore } from '@/stores/filters';
+import {storeToRefs} from "pinia";
+const filtersStore = useFiltersStore();
+const { bot } = storeToRefs(filtersStore);
+</script>
 <script>
 import axios from "axios";
 import _ from "underscore";
 import {useUserStore} from "@/stores/user";
-import Multiselect from '@vueform/multiselect'
+import Multiselect from '@vueform/multiselect';
+import {useFiltersStore} from "@/stores/filters";
+import {storeToRefs} from "pinia";
+const filtersStore = useFiltersStore();
 export default {
     components: {
         Multiselect,
@@ -49,19 +58,9 @@ export default {
         return {
             logs: [],
             interval: null,
-            page: 1,
-            limit: 10,
-            history: 45,
             last_id: null,
             filters: {
-                show: false,
-                filter: false,
-                limit: 10,
-                code: {
-                    value: null,
-                    options: ["blue", "success", "error", "warning"]
-                },
-                debug: true,
+                show: false
             }
         }
     },
@@ -75,7 +74,7 @@ export default {
     methods: {
         async load() {
             const userStore = useUserStore();
-            const result = await axios.get(`/api/v1/bot/log?page=1&limit=${this.history}&debug=${this.filters.debug}`, { headers: {'Authorization' : `Bearer ${userStore.token()}` } });
+            const result = await axios.get(`/api/v1/bot/log?page=1&limit=${filtersStore.bot.history}&debug=${filtersStore.bot.filters.debug}`, { headers: {'Authorization' : `Bearer ${userStore.token()}` } });
             if (result.data.items.length) {
                 this.logs = result.data.items;
                 const first = _.first(result.data.items);
@@ -92,15 +91,15 @@ export default {
             }
         },
         getFilters() {
-            if (!this.filters.filter) {
-                return `?page=1&limit=${this.limit}&id=${this.last_id}`;
+            if (!filtersStore.bot.filters.filter) {
+                return `?page=1&limit=${filtersStore.bot.limit}&id=${this.last_id}`;
             }
             let filters = "?page=1";
-            filters += `&limit=${this.filters.limit}`;
+            filters += `&limit=${filtersStore.bot.filters.limit}`;
             filters += `&id=${this.last_id}`;
-            filters += `&debug=${this.filters.debug}`;
-            if (this.filters.code.value && this.filters.code.value.length) {
-                filters += `&code=${this.filters.code.value.join(",")}`;
+            filters += `&debug=${filtersStore.bot.filters.debug}`;
+            if (filtersStore.bot.filters.code.value && filtersStore.bot.filters.code.value.length) {
+                filters += `&code=${filtersStore.bot.filters.code.value.join(",")}`;
             }
             return filters;
         },
@@ -108,18 +107,18 @@ export default {
             this.filters.show = !this.filters.show;
         },
         applyFilters() {
-            this.filters.filter = true;
+            filtersStore.bot.filters.filter = true;
             this.logs = [];
             this.last_id = 0
             this.reload();
         },
         clearFilters() {
-            this.filters.filter = false;
+            filtersStore.bot.filters.filter = false;
             this.logs = [];
             this.last_id = 0
-            this.filters.code.value = null;
-            this.filters.debug = true;
-            this.filters.limit = 10;
+            filtersStore.bot.filters.code.value = null;
+            filtersStore.bot.filters.debug = true;
+            filtersStore.bot.filters.limit = 10;
             this.reload();
         }
     }
