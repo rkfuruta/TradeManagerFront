@@ -23,7 +23,7 @@
         </div>
     </td>
     <td>
-        <div class="profit value" v-if="transaction.sell_value" :class="{ green: hasProfit, red: !hasProfit}">
+        <div class="profit value" v-if="transaction.sell_value" :class="{ green: hasProfit(), red: !hasProfit()}">
             <font-awesome-icon icon="fa-solid fa-coins" class="icon coins" />
             {{ getProfit() }}
         </div>
