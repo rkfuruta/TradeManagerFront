@@ -8,14 +8,12 @@
             {{ timeLeft() }}
         </div>
     </td>
-    <td>{{ formatDate(transaction.purchase_date) }}</td>
     <td>
         <div class="purchase value">
             <font-awesome-icon icon="fa-solid fa-coins" class="icon coins" />
             {{ formatCurrency(transaction.purchase_value) }}
         </div>
     </td>
-    <td>{{ formatDate(transaction.sell_date) }}</td>
     <td>
         <div class="sell value" v-if="transaction.sell_value">
             <font-awesome-icon icon="fa-solid fa-coins" class="icon coins" />
@@ -29,6 +27,8 @@
         </div>
     </td>
     <td>{{ getProfitPercent() }}</td>
+    <td>{{ formatDate(transaction.purchase_date) }}</td>
+    <td>{{ formatDate(transaction.sell_date) }}</td>
     <td>{{ getSellingDays() }}</td>
 </template>
 <script>

@@ -55,12 +55,12 @@ import Transaction from "@/components/dashboard/Transaction.vue";
             <table class="transaction-wrapper">
                 <tr>
                     <th>Item</th>
-                    <th>Purchase Date</th>
                     <th>Purchase Value</th>
-                    <th>Sold Date</th>
                     <th>Sold Value</th>
                     <th>Profit</th>
                     <th>Profit %</th>
+                    <th>Purchase Date</th>
+                    <th>Sold Date</th>
                     <th>Days selling</th>
                 </tr>
                 <tr v-for="transaction in transactions">
