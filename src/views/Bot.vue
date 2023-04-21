@@ -19,7 +19,7 @@
                     <input v-model="bot.filters.limit">
                 </div>
                 <div class="debug fieldset filter-option">
-                    <label>Show debug</label>
+                    <label>Remove debug</label>
                     <input type="checkbox" v-model="bot.filters.debug">
                 </div>
             </div>
@@ -72,7 +72,11 @@ export default {
     methods: {
         async load() {
             const userStore = useUserStore();
-            const result = await axios.get(`/api/v1/bot/log?page=1&limit=${filtersStore.bot.history}&debug=${filtersStore.bot.filters.debug}`, { headers: {'Authorization' : `Bearer ${userStore.token()}` } });
+            let url = `/api/v1/bot/log?page=1&limit=${filtersStore.bot.history}`;
+            if (filtersStore.bot.filters.debug) {
+                url += `&debug=${!filtersStore.bot.filters.debug}`;
+            }
+            const result = await axios.get(url, { headers: {'Authorization' : `Bearer ${userStore.token()}` } });
             if (result.data.items.length) {
                 this.logs = result.data.items;
                 const first = _.first(result.data.items);
@@ -95,7 +99,9 @@ export default {
             let filters = "?page=1";
             filters += `&limit=${filtersStore.bot.filters.limit}`;
             filters += `&id=${this.last_id}`;
-            filters += `&debug=${filtersStore.bot.filters.debug}`;
+            if (filtersStore.bot.filters.debug) {
+                filters += `&debug=${!filtersStore.bot.filters.debug}`;
+            }
             if (filtersStore.bot.filters.code.value && filtersStore.bot.filters.code.value.length) {
                 filters += `&code=${filtersStore.bot.filters.code.value.join(",")}`;
             }
@@ -115,7 +121,7 @@ export default {
             this.logs = [];
             this.last_id = 0
             filtersStore.bot.filters.code.value = null;
-            filtersStore.bot.filters.debug = true;
+            filtersStore.bot.filters.debug = false;
             filtersStore.bot.filters.limit = 10;
             this.reload();
         }
@@ -159,11 +165,15 @@ export default {
 .message.warning {
     color: yellow;
 }
-.message.error {
+.message.error,
+.message.exception {
     color: red;
 }
 .message.success {
     color: green;
+}
+.message .content.exception {
+    text-decoration: underline;
 }
 .multiselect-code {
     min-width: 200px;

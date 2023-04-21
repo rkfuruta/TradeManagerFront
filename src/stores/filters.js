@@ -11,9 +11,9 @@ export const useFiltersStore = defineStore('filters', {
                 limit: 10,
                 code: {
                     value: null,
-                    options: ["blue", "success", "error", "warning"]
+                    options: ["blue", "success", "error", "warning", "exception"]
                 },
-                debug: true,
+                debug: false,
             }
         }
     }),
