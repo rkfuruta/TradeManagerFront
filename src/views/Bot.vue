@@ -63,26 +63,13 @@ export default {
         }
     },
     mounted() {
-        this.load();
+        this.reload();
         this.interval = setInterval(this.reload, 5000);
     },
     unmounted() {
         clearInterval(this.interval);
     },
     methods: {
-        async load() {
-            const userStore = useUserStore();
-            let url = `/api/v1/bot/log?page=1&limit=${filtersStore.bot.history}`;
-            if (filtersStore.bot.filters.debug) {
-                url += `&debug=${!filtersStore.bot.filters.debug}`;
-            }
-            const result = await axios.get(url, { headers: {'Authorization' : `Bearer ${userStore.token()}` } });
-            if (result.data.items.length) {
-                this.logs = result.data.items;
-                const first = _.first(result.data.items);
-                this.last_id = first.entity_id;
-            }
-        },
         async reload() {
             const userStore = useUserStore();
             const result = await axios.get(`/api/v1/bot/log${this.getFilters()}`, { headers: {'Authorization' : `Bearer ${userStore.token()}` } });
