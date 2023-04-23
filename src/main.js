@@ -8,9 +8,9 @@ import helper from './helper/helper'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 
-import {faRotate, faCoins, faLock, faLockOpen, faWallet, faCreditCard} from '@fortawesome/free-solid-svg-icons'
+import {faRotate, faCoins, faLock, faLockOpen, faWallet, faCreditCard, faCopy} from '@fortawesome/free-solid-svg-icons'
 
-library.add(faRotate, faCoins, faLock, faLockOpen, faWallet, faCreditCard)
+library.add(faRotate, faCoins, faLock, faLockOpen, faWallet, faCreditCard, faCopy)
 
 import './assets/main.css'
 

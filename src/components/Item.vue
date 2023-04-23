@@ -2,6 +2,7 @@
     <div class="item-wrapper" :class="{ 'not-tradable': !item.tradable }">
         <div class="head">
             <span class="name" :title="item.market_name">{{item.market_name}}</span>
+            <font-awesome-icon icon="fa-solid fa-copy" class="copy" @click="copyMarketName"/>
         </div>
         <div class="content">
             <div class="image">
@@ -127,6 +128,15 @@ export default {
                 return null;
             }
             this.sell_percent = profitPercent - (cycles * 2);
+        },
+        copyMarketName(event) {
+            var copyText = event.target.closest(".head").querySelector(".name");
+            var textArea = document.createElement("textarea");
+            textArea.value = copyText.textContent;
+            document.body.appendChild(textArea);
+            textArea.select();
+            document.execCommand("Copy");
+            textArea.remove();
         }
     },
     computed: {
@@ -153,6 +163,15 @@ export default {
     display: block;
     text-overflow: ellipsis;
     font-weight: bold;
+}
+.item-wrapper .head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.item-wrapper .head .copy {
+    margin-left: 10px;
+    cursor: pointer;
 }
 .content .image {
     display: flex;
