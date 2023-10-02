@@ -151,6 +151,7 @@ export default {
                     total += transaction.sell_value - transaction.purchase_value;
                 }
             });
+            return total;
         },
         totalProfit() {
             if (this.profit <= 0) {
@@ -202,7 +203,7 @@ export default {
             return this.profitPercent.toFixed(2) + "%"
         },
         profitForecast() {
-            if (!this.profitPercent) {
+            if (this.profitPercent <= 0) {
                 return 0;
             }
             let value = this.profit;
