@@ -35,13 +35,19 @@ import Transaction from "@/components/dashboard/Transaction.vue";
             <div class="title">Items Value</div>
             <div class="value">
                 <font-awesome-icon icon="fa-solid fa-coins" class="icon coins" />
-                {{ itemsValue }}
+                {{ itemsValueFormatted }}
             </div>
         </div>
         <div class="item">
             <div class="title">Profit %</div>
             <div class="value">
-                {{ profitPercent }}
+                {{ profitPercentFormatted }}
+            </div>
+        </div>
+        <div class="item">
+            <div class="title">Profit forecast</div>
+            <div class="value">
+                {{ profitForecast }}
             </div>
         </div>
     </div>
@@ -123,6 +129,9 @@ export default {
             _.each(this.transactions, (transaction) => {
                 total += transaction.purchase_value;
             });
+            if (total <= 0) {
+                return 0;
+            }
             return this.formatCurrency(total);
         },
         totalSold() {
@@ -130,16 +139,24 @@ export default {
             _.each(this.transactions, (transaction) => {
                 total += transaction.sell_value;
             });
+            if (total <= 0) {
+                return 0;
+            }
             return this.formatCurrency(total);
         },
-        totalProfit() {
+        profit() {
             let total = 0;
             _.each(this.transactions, (transaction) => {
                 if (transaction.sell_value) {
                     total += transaction.sell_value - transaction.purchase_value;
                 }
             });
-            return this.formatCurrency(total);
+        },
+        totalProfit() {
+            if (this.profit <= 0) {
+                return 0;
+            }
+            return this.formatCurrency(this.profit);
         },
         averageProfit() {
             let total = 0;
@@ -162,7 +179,10 @@ export default {
             if (total <= 0) {
                 return 0;
             }
-            return this.formatCurrency(total);
+            return total;
+        },
+        itemsValueFormatted() {
+            return this.formatCurrency(this.itemsValue);
         },
         profitPercent() {
             let total = 0;
@@ -176,8 +196,19 @@ export default {
             if (total <= 0) {
                 return 0;
             }
-            return (profit*100/total).toFixed(2) + "%";
-        }
+            return (profit*100/total);
+        },
+        profitPercentFormatted() {
+            return this.profitPercent.toFixed(2) + "%"
+        },
+        profitForecast() {
+            if (!this.profitPercent) {
+                return 0;
+            }
+            let value = this.profit;
+            let futureValue = this.itemsValue*this.profitPercent/100;
+            return this.formatCurrency(value+futureValue);
+        },
     }
 }
 </script>
