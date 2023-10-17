@@ -52,3 +52,39 @@ margin-right: 5px;
 .fieldset input {
   font-size: 16px;
 }
+.primary {
+  color: #56C5D0;
+}
+.primary-2 {
+  color: #4DB1BB;
+}
+.primary-3 {
+  color: #459EA6;
+}
+.primary-4 {
+  color: #34767D;
+}
+.primary-5 {
+  color: #224F53;
+}
+.primary-6 {
+  color: #11272A;
+}
+.secondary {
+  color: #AE385B;
+}
+.secondary-2 {
+  color: #9D3252;
+}
+.secondary-3 {
+  color: #8B2D49;
+}
+.secondary-4 {
+  color: #682237;
+}
+.secondary-5 {
+  color: #461624;
+}
+.secondary-6 {
+  color: #230B12;
+}

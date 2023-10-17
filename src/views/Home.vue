@@ -18,5 +18,7 @@ const { user } = storeToRefs(userStore);
 .main-content main.guest {
     display: flex;
     justify-content: center;
+    align-items: center;
+    height: 100%;
 }
 </style>

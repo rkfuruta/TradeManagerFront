@@ -1,22 +1,24 @@
 <template>
-    <div class="login-form">
-        <div class="header">
-            <span class="title">Login</span>
+    <div class="login-wrapper">
+        <div class="logo-wrapper">
+            <img class="logo" src="../assets/logo/eskinbo_primary.svg" alt="eskinbo"/>
         </div>
-        <form v-on:submit.prevent="login">
-            <div class="fieldset">
-                <input type="text" id="email" v-model="email" placeholder="Email">
+        <div class="login-form">
+            <div class="header">
+                <span class="title">Login</span>
             </div>
-            <div class="fieldset">
-                <input type="password" id="password" v-model="password" placeholder="Password">
-            </div>
-            <div class="login-actions">
-                <button class="btn login" type="submit">Login</button>
-                <button class="btn login steam" type="button" @click="steam">
-                    <img src="https://community.akamai.steamstatic.com/public/shared/images/header/logo_steam.svg?t=962016">
-                </button>
-            </div>
-        </form>
+            <form v-on:submit.prevent="login">
+                <div class="fieldset">
+                    <input type="text" id="email" v-model="email" placeholder="Email">
+                </div>
+                <div class="fieldset">
+                    <input type="password" id="password" v-model="password" placeholder="Password">
+                </div>
+                <div class="login-actions">
+                    <button class="btn login" type="submit">Login</button>
+                </div>
+            </form>
+        </div>
     </div>
 </template>
 
@@ -107,5 +109,13 @@ export default {
         height: 40px;
         display: flex;
         justify-content: center;
+    }
+    .logo-wrapper {
+        display: flex;
+        justify-content: center;
+        margin-bottom: 25%;
+    }
+    .logo {
+        width: 60%;
     }
 </style>

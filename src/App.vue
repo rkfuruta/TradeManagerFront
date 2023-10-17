@@ -1,9 +1,9 @@
 <template>
     <div class="header">
-        <Header />
+        <Header v-if="user"/>
         <Message v-if="message" />
     </div>
-    <div class="main-content">
+    <div class="main-content" :class="{ login: !user }">
         <RouterView />
     </div>
 </template>
@@ -16,6 +16,9 @@ import {useMessageStore} from "@/stores/message";
 import {storeToRefs} from "pinia";
 const messageStore = useMessageStore();
 const { message } = storeToRefs(messageStore);
+import {useUserStore} from "@/stores/user";
+const userStore = useUserStore();
+const { user } = storeToRefs(userStore);
 </script>
 
 <style scoped>
@@ -26,6 +29,9 @@ header {
 }
 .main-content {
     padding: 2rem;
+}
+.main-content.login {
+    height:100vh;
 }
 .logo {
   display: block;
