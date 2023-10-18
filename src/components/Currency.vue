@@ -1,7 +1,7 @@
 <template>
     <div class="currency-wrapper">
-        <span class="currency-icon" v-if="show_icon" v-html="current.icon"></span>
-        <span class="currency-value">{{ value }}</span>
+        <span class="currency-icon" v-if="show_icon" v-html="current.icon" :class="{ bold: bold }"></span>
+        <span class="currency-value" :class="{ bold: bold }">{{ value }}</span>
     </div>
 </template>
 
@@ -13,6 +13,10 @@ export default {
         show_icon: {
             type: Boolean,
             default: true
+        },
+        bold: {
+            type: Boolean,
+            default: false
         },
     },
     computed: {
@@ -46,8 +50,8 @@ export default {
 .currency-icon :deep(.coin-icon)  {
     width: 22px;
 }
-.currency-icon,
-.currency-value {
+.currency-icon.bold,
+.currency-value.bold{
     font-weight: bold;
 }
 </style>

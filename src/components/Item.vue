@@ -12,19 +12,18 @@
         <div class="footer">
             <div class="info">
                 <div class="market_value" title="Market Value" v-if="item.market_value > 0">
-                    <font-awesome-icon icon="fa-solid fa-coins" class="icon coins" />
-                    <span class="amount">{{ formatCoins(item.market_value) }}</span>
+                    <Currency :amount="formatCoins(item.market_value)"/>
                 </div>
                 <div class="market_value" title="Market Value" v-if="item.market_value < 0">
                     <span>Not sellable</span>
                 </div>
                 <div class="purchase_value" title="Purchase Value" v-if="item.purchase_value > 0">
                     <font-awesome-icon icon="fa-solid fa-wallet" class="icon wallet" />
-                    <span class="amount">{{ formatCoins(item.purchase_value) }}</span>
+                    <Currency :amount="formatCoins(item.purchase_value)" :show_icon="false"/>
                 </div>
                 <div class="sell_value" title="Recommended Sell Value" v-if="sell_price">
                     <font-awesome-icon icon="fa-solid fa-credit-card" class="icon credit-card" />
-                    <span class="amount">{{ sell_price }}</span>
+                    <Currency :amount="sell_price" :show_icon="false"/>
                     <span class="percent">{{ this.sell_percent }}%</span>
                 </div>
             </div>
@@ -48,6 +47,9 @@
         </div>
     </div>
 </template>
+<script setup>
+import Currency from "@/components/Currency.vue";
+</script>
 <script>
 import moment from 'moment';
 import axios from 'axios';
@@ -151,6 +153,11 @@ export default {
 }
 </script>
 <style scope>
+.sell_value,
+.purchase_value {
+    display: flex;
+    align-items: center;
+}
 .item-wrapper {
     background-color: #383838;
     width: 300px;
@@ -230,8 +237,9 @@ export default {
 .sell_value {
 
 }
-.sell_value .amount::after {
+.sell_value .percent::before {
     content: "-";
+    padding: 0 5px;
 }
 @media only screen and (max-width: 450px) {
     .item-wrapper {

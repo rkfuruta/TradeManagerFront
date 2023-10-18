@@ -1,6 +1,7 @@
 <template>
     <td class="item name">
         <div class="name">
+            <div class="index">{{row}}</div>
             <a :href="steamUrl()" target="_blank">{{ transaction.market_name }}</a>
         </div>
         <div class="tradelock" v-if="transaction.tradelock">
@@ -10,20 +11,17 @@
     </td>
     <td>
         <div class="purchase value">
-            <font-awesome-icon icon="fa-solid fa-coins" class="icon coins" />
-            {{ formatCurrency(transaction.purchase_value) }}
+            <Currency :amount="formatCurrency(transaction.purchase_value)" />
         </div>
     </td>
     <td>
         <div class="sell value" v-if="transaction.sell_value">
-            <font-awesome-icon icon="fa-solid fa-coins" class="icon coins" />
-            {{ formatCurrency(transaction.sell_value) }}
+            <Currency :amount="formatCurrency(transaction.sell_value)" />
         </div>
     </td>
     <td>
         <div class="profit value" v-if="transaction.sell_value" :class="{ green: hasProfit(), red: !hasProfit()}">
-            <font-awesome-icon icon="fa-solid fa-coins" class="icon coins" />
-            {{ getProfit() }}
+            <Currency :amount="getProfit()" />
         </div>
     </td>
     <td>{{ getProfitPercent() }}</td>
@@ -31,11 +29,15 @@
     <td>{{ formatDate(transaction.sell_date) }}</td>
     <td>{{ getSellingDays() }}</td>
 </template>
+<script setup>
+import Currency from "@/components/Currency.vue";
+</script>
 <script>
 import moment from "moment-timezone";
 export default {
     props: {
-        transaction: {}
+        transaction: {},
+        index: 1
     },
     methods: {
         steamUrl() {
@@ -83,6 +85,11 @@ export default {
         hasProfit() {
             return (this.transaction.sell_value - this.transaction.purchase_value) > 0;
         }
+    },
+    computed: {
+        row() {
+            return this.index + 1;
+        }
     }
 }
 </script>
@@ -91,6 +98,13 @@ export default {
     display: flex;
     align-items: center;
     justify-content: space-between;
+}
+.item.name .name {
+    display: flex;
+}
+.item.name .name .index {
+    font-weight: bold;
+    padding-right: 10px;
 }
 .item.name .name a{
     color: rgba(235, 235, 235, 0.64);

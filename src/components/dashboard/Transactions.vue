@@ -3,31 +3,31 @@
         <div class="item">
             <div class="title">Purchases</div>
             <div class="value">
-                <Currency :amount="totalPurchased"></Currency>
+                <Currency :amount="totalPurchased" :bold="true"></Currency>
             </div>
         </div>
         <div class="item">
             <div class="title">Sales</div>
             <div class="value">
-                <Currency :amount="totalSold" />
+                <Currency :amount="totalSold" :bold="true"/>
             </div>
         </div>
         <div class="item">
             <div class="title">Profit</div>
             <div class="value">
-                <Currency :amount="totalProfit" />
+                <Currency :amount="totalProfit" :bold="true"/>
             </div>
         </div>
         <div class="item">
             <div class="title">Avg. Profit</div>
             <div class="value">
-                <Currency :amount="averageProfit" />
+                <Currency :amount="averageProfit" :bold="true"/>
             </div>
         </div>
         <div class="item">
             <div class="title">Items Value</div>
             <div class="value">
-                <Currency :amount="itemsValueFormatted" />
+                <Currency :amount="itemsValueFormatted" :bold="true"/>
             </div>
         </div>
         <div class="item">
@@ -39,7 +39,7 @@
         <div class="item">
             <div class="title">Profit forecast</div>
             <div class="value">
-                <Currency :amount="profitForecast" />
+                <Currency :amount="profitForecast" :bold="true"/>
             </div>
         </div>
     </div>
@@ -61,8 +61,8 @@
                     <th>Sold Date</th>
                     <th>Days selling</th>
                 </tr>
-                <tr v-for="transaction in transactions">
-                    <Transaction :transaction="transaction" />
+                <tr v-for="(transaction, index) in transactions">
+                    <Transaction :transaction="transaction" :index="index" />
                 </tr>
             </table>
         </div>
