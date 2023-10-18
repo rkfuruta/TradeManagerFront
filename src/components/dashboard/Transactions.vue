@@ -9,29 +9,25 @@
         <div class="item">
             <div class="title">Sales</div>
             <div class="value">
-                <font-awesome-icon icon="fa-solid fa-coins" class="icon coins" />
-                {{ totalSold }}
+                <Currency :amount="totalSold" />
             </div>
         </div>
         <div class="item">
             <div class="title">Profit</div>
             <div class="value">
-                <font-awesome-icon icon="fa-solid fa-coins" class="icon coins" />
-                {{ totalProfit }}
+                <Currency :amount="totalProfit" />
             </div>
         </div>
         <div class="item">
             <div class="title">Avg. Profit</div>
             <div class="value">
-                <font-awesome-icon icon="fa-solid fa-coins" class="icon coins" />
-                {{ averageProfit }}
+                <Currency :amount="averageProfit" />
             </div>
         </div>
         <div class="item">
             <div class="title">Items Value</div>
             <div class="value">
-                <font-awesome-icon icon="fa-solid fa-coins" class="icon coins" />
-                {{ itemsValueFormatted }}
+                <Currency :amount="itemsValueFormatted" />
             </div>
         </div>
         <div class="item">
@@ -43,7 +39,7 @@
         <div class="item">
             <div class="title">Profit forecast</div>
             <div class="value">
-                {{ profitForecast }}
+                <Currency :amount="profitForecast" />
             </div>
         </div>
     </div>
@@ -168,6 +164,9 @@ export default {
                     total += transaction.sell_value - transaction.purchase_value;
                 }
             });
+            if (amount === 0) {
+                return 0;
+            }
             return this.formatCurrency(total/amount);
         },
         itemsValue() {
