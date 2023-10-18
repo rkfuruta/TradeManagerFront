@@ -1,6 +1,6 @@
 <template>
     <div class="currency-wrapper">
-        <span class="currency-icon" v-if="show_icon" v-html="current.icon" :class="{ bold: bold }"></span>
+        <span class="currency-icon" v-if="show_icon" v-html="icon" :class="{ bold: bold }"></span>
         <span class="currency-value" :class="{ bold: bold }">{{ value }}</span>
     </div>
 </template>
@@ -20,6 +20,12 @@ export default {
         },
     },
     computed: {
+        icon() {
+            if (this.current.is_image_icon) {
+                return `<img class="${this.current.value}-icon" src="${this.current.icon}" alt="${this.current.label}"/>`;
+            }
+            return this.current.icon;
+        },
         selected() {
             const currencyStore = useCurrencyStore();
             return currencyStore.selected;

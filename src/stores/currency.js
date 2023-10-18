@@ -1,10 +1,12 @@
 import { defineStore } from 'pinia'
+import coin from "@/assets/icon/coin.svg";
 
 const currencyOptions = {
     "coin": {
         "label": "Coin",
         "value": "coin",
-        "icon": '<img class="coin-icon" src="/src/assets/icon/coin.svg" alt="coin"/>',
+        "icon": coin,
+        "is_image_icon": true,
         "convert": (value) => {
             if (value === undefined || value === null) {
                 value = 0;
@@ -18,6 +20,7 @@ const currencyOptions = {
         "label": "Real",
         "value": "brl",
         "icon": "R$",
+        "is_image_icon": false,
         "convert": (value) => {
             return ((value * 0.614) * 5).toLocaleString('en-US', {
                 maximumFractionDigits: 2
@@ -28,6 +31,7 @@ const currencyOptions = {
         "label": "Dollar",
         "value": "usd",
         "icon": "$",
+        "is_image_icon": false,
         "convert": (value) => {
             return (value * 0.614).toLocaleString('en-US', {
                 maximumFractionDigits: 2
