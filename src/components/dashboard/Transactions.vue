@@ -1,13 +1,9 @@
-<script setup>
-import Transaction from "@/components/dashboard/Transaction.vue";
-</script>
 <template>
     <div class="statistics">
         <div class="item">
             <div class="title">Purchases</div>
             <div class="value">
-                <font-awesome-icon icon="fa-solid fa-coins" class="icon coins" />
-                {{ totalPurchased }}
+                <Currency :amount="totalPurchased"></Currency>
             </div>
         </div>
         <div class="item">
@@ -76,6 +72,10 @@ import Transaction from "@/components/dashboard/Transaction.vue";
         </div>
     </div>
 </template>
+<script setup>
+import Transaction from "@/components/dashboard/Transaction.vue";
+import Currency from "@/components/Currency.vue";
+</script>
 <script>
 import axios from "axios";
 import { useUserStore } from '@/stores/user';

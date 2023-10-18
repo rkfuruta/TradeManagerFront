@@ -11,11 +11,15 @@
                 <span>Bot</span>
             </div>
         </div>
-        <UserHeader class="user-header" />
+        <div class="left">
+            <CurrencySelector />
+            <UserHeader class="user-header item" />
+        </div>
     </div>
 </template>
 <script setup>
 import UserHeader from "@/components/basic/UserHeader.vue";
+import CurrencySelector from "@/components/CurrencySelector.vue";
 </script>
 <script>
 export default  {
@@ -48,8 +52,9 @@ export default  {
 .nav-bar .item:hover {
     background-color: #181818;
 }
-.nav-bar .user-header {
+.nav-bar .left {
     display: flex;
     justify-content: end;
+    align-items: center;
 }
 </style>
