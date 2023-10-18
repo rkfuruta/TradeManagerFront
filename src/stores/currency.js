@@ -4,7 +4,7 @@ const currencyOptions = {
     "coin": {
         "label": "Coin",
         "value": "coin",
-        "icon": '<img class="coin-icon" src="../src/assets/icon/coin.svg" alt="coin"/>',
+        "icon": '<img class="coin-icon" src="/src/assets/icon/coin.svg" alt="coin"/>',
         "convert": (value) => {
             if (value === undefined || value === null) {
                 value = 0;
