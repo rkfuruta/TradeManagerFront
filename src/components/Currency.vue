@@ -1,6 +1,7 @@
 <template>
     <div class="currency-wrapper">
-        <span class="currency-icon" v-if="show_icon" v-html="icon" :class="{ bold: bold }"></span>
+        <span class="currency-icon" v-if="hasIcon" v-html="icon" :class="{ bold: bold }"></span>
+        <span class="currency-symbol" v-if="hasSymbol" v-html="symbol" :class="{ bold: bold }"></span>
         <span class="currency-value" :class="{ bold: bold }">{{ value }}</span>
     </div>
 </template>
@@ -14,6 +15,10 @@ export default {
             type: Boolean,
             default: true
         },
+        show_symbol: {
+            type: Boolean,
+            default: true
+        },
         bold: {
             type: Boolean,
             default: false
@@ -21,10 +26,26 @@ export default {
     },
     computed: {
         icon() {
-            if (this.current.is_image_icon) {
+            if (this.current.hasOwnProperty("icon")) {
                 return `<img class="${this.current.value}-icon" src="${this.current.icon}" alt="${this.current.label}"/>`;
             }
-            return this.current.icon;
+        },
+        hasIcon() {
+            if (this.show_icon && this.current.hasOwnProperty("icon")) {
+                return true;
+            }
+            return false;
+        },
+        symbol() {
+            if (this.current.hasOwnProperty("symbol")) {
+                return this.current.symbol;
+            }
+        },
+        hasSymbol() {
+            if (this.show_symbol && this.current.hasOwnProperty("symbol")) {
+                return true;
+            }
+            return false;
         },
         selected() {
             const currencyStore = useCurrencyStore();

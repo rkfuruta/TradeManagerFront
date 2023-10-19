@@ -6,7 +6,6 @@ const currencyOptions = {
         "label": "Coin",
         "value": "coin",
         "icon": coin,
-        "is_image_icon": true,
         "convert": (value) => {
             if (value === undefined || value === null) {
                 value = 0;
@@ -19,8 +18,7 @@ const currencyOptions = {
     "brl": {
         "label": "Real",
         "value": "brl",
-        "icon": "R$",
-        "is_image_icon": false,
+        "symbol": "R$",
         "convert": (value) => {
             return ((value * 0.614) * 5).toLocaleString('en-US', {
                 maximumFractionDigits: 2
@@ -30,8 +28,7 @@ const currencyOptions = {
     "usd": {
         "label": "Dollar",
         "value": "usd",
-        "icon": "$",
-        "is_image_icon": false,
+        "symbol": "$",
         "convert": (value) => {
             return (value * 0.614).toLocaleString('en-US', {
                 maximumFractionDigits: 2
