@@ -2,10 +2,17 @@
     <main>
         <div class="header">
             <div class="title">Inventory</div>
-            <button class="btn primary" @click="reload">
-                <font-awesome-icon icon="fa-solid fa-rotate" class="icon" />
-                <span>Reload</span>
-            </button>
+        </div>
+        <div class="inventory-update">
+            <div class="button">
+                <button class="btn secondary" @click="reload">
+                    <img class="icon" src="@/assets/icon/sync.svg" alt="Reload">
+                    <span>Reload</span>
+                </button>
+            </div>
+            <div class="updated-at">
+                <Date class="date" :date="updated_at"></Date>
+            </div>
         </div>
         <div class="items-wrapper" v-if="inventory && inventory.items">
             <div class="inventory-item-container" v-for="item in inventory.items">
@@ -17,9 +24,10 @@
 
 <script setup>
 import Item from '@/components/Item.vue';
+import Date from '@/components/Date.vue';
 import {useUserStore} from "@/stores/user";
 import {storeToRefs} from "pinia";
-const { inventory } = storeToRefs(inventoryStore);
+const { inventory, updated_at } = storeToRefs(inventoryStore);
 </script>
 
 <script>
@@ -45,11 +53,39 @@ export default {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding-bottom: 2rem;
+    padding-bottom: 5px;
+    border-bottom: 1px solid var(--secondary);
+    width: 80%;
+    margin-bottom: 15px;
 }
 .header .title {
     font-size: 30px;
     font-weight: bold;
+    color: var(--secondary);
+}
+.inventory-update {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    align-items: center;
+}
+.inventory-update .icon {
+    filter: var(--svg-white);
+}
+.inventory-update .button {
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+    margin-bottom: 10px;
+}
+.inventory-update .btn {
+    padding: 0.3rem 1rem;
+}
+.inventory-update .updated-at {
+    margin-bottom: 10px;
+}
+.inventory-update .updated-at .date {
+    font-size: 13px;
 }
 .items-wrapper {
     display: flex;

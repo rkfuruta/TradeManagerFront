@@ -19,6 +19,36 @@
   --vt-c-text-light-2: rgba(60, 60, 60, 0.66);
   --vt-c-text-dark-1: var(--vt-c-white);
   --vt-c-text-dark-2: rgba(235, 235, 235, 0.64);
+
+  --primary: #56C5D0;
+  --primary-2: #4DB1BB;
+  --primary-3: #459EA6;
+  --primary-4: #34767D;
+  --primary-5: #224F53;
+  --primary-6: #11272A;
+
+  --svg-primary: invert(67%) sepia(59%) saturate(379%) hue-rotate(137deg) brightness(96%) contrast(84%);
+  --svg-primary-2: invert(52%) sepia(95%) saturate(243%) hue-rotate(137deg) brightness(100%) contrast(90%);
+  --svg-primary-3: invert(61%) sepia(10%) saturate(1919%) hue-rotate(137deg) brightness(89%) contrast(88%);
+  --svg-primary-4: invert(44%) sepia(11%) saturate(1745%) hue-rotate(137deg) brightness(89%) contrast(91%);
+  --svg-primary-5: invert(24%) sepia(6%) saturate(4485%) hue-rotate(137deg) brightness(96%) contrast(84%);
+  --svg-primary-6: invert(11%) sepia(7%) saturate(3529%) hue-rotate(139deg) brightness(91%) contrast(91%);
+
+  --secondary: #AE385B;
+  --secondary-2: #9D3252;
+  --secondary-3: #8B2D49;
+  --secondary-4: #682237;
+  --secondary-5: #461624;
+  --secondary-6: #230B12;
+
+  --svg-secondary: invert(29%) sepia(31%) saturate(2407%) hue-rotate(305deg) brightness(94%) contrast(89%);
+  --svg-secondary-2: invert(24%) sepia(19%) saturate(4572%) hue-rotate(309deg) brightness(95%) contrast(87%);
+  --svg-secondary-3: invert(23%) sepia(78%) saturate(770%) hue-rotate(298deg) brightness(91%) contrast(95%);
+  --svg-secondary-4: invert(17%) sepia(16%) saturate(5243%) hue-rotate(307deg) brightness(90%) contrast(92%);
+  --svg-secondary-5: invert(12%) sepia(26%) saturate(2698%) hue-rotate(305deg) brightness(90%) contrast(96%);
+  --svg-secondary-6: invert(5%) sepia(30%) saturate(3295%) hue-rotate(311deg) brightness(97%) contrast(97%);
+
+  --svg-white: invert(100%) sepia(100%) saturate(0%) hue-rotate(288deg) brightness(102%) contrast(102%);
 }
 
 /* semantic color variables for this project */
