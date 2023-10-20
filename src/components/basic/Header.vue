@@ -116,5 +116,11 @@ export default  {
         background-color: var(--secondary-2);
         width: 100%;
     }
+    .nav-bar .logo {
+        position: absolute;
+        left: 50px;
+        top: 15px;
+        z-index: 1;
+    }
 }
 </style>
