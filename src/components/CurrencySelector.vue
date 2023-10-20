@@ -26,11 +26,11 @@ export default {
 </script>
 <style scoped>
 .currency-selector select {
-    border: 1px solid inherit;
+    border: unset;
     outline: 0px;
-    -webkit-border-radius: 0px;
-    background-color: #383838;
+    -webkit-border-radius: 3px;
+    background-color: var(--secondary);
     color: inherit;
-    padding: 5px;
+    padding: 8px 10px;
 }
 </style>
