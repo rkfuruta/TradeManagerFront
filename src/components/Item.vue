@@ -1,48 +1,44 @@
 <template>
     <div class="item-wrapper" :class="{ 'not-tradable': !item.tradable }">
         <div class="head">
-            <span class="name" :title="item.market_name">{{item.market_name}}</span>
-            <font-awesome-icon icon="fa-solid fa-copy" class="copy" @click="copyMarketName"/>
-        </div>
-        <div class="content">
             <div class="image">
                 <img :src="getImageUrl()">
             </div>
         </div>
-        <div class="footer">
+        <div class="content">
+            <span class="name" :title="item.market_name" @click="copyMarketName">{{item.market_name}}</span>
             <div class="info">
                 <div class="market_value" title="Market Value" v-if="item.market_value > 0">
-                    <Currency :amount="formatCoins(item.market_value)"/>
+                    <img class="market_value-icon" src="@/assets/icon/market.svg" alt="market" />
+                    <Currency :amount="formatCoins(item.market_value)" :show_icon="false"/>
                 </div>
                 <div class="market_value" title="Market Value" v-if="item.market_value < 0">
                     <span>Not sellable</span>
                 </div>
                 <div class="purchase_value" title="Purchase Value" v-if="item.purchase_value > 0">
-                    <font-awesome-icon icon="fa-solid fa-wallet" class="icon wallet" />
+                    <img class="purchase_value-icon" src="@/assets/icon/buy.svg" alt="purchase" />
                     <Currency :amount="formatCoins(item.purchase_value)" :show_icon="false"/>
                 </div>
                 <div class="sell_value" title="Recommended Sell Value" v-if="sell_price">
-                    <font-awesome-icon icon="fa-solid fa-credit-card" class="icon credit-card" />
+                    <img class="sell_value-icon" src="@/assets/icon/inventory.svg" alt="sell" />
                     <Currency :amount="sell_price" :show_icon="false"/>
-                    <span class="percent">{{ this.sell_percent }}%</span>
                 </div>
             </div>
-            <div class="updated">
-                <span>{{ formattedUpdatedAt() }}</span>
-            </div>
-            <div class="tradelock" v-if="item.tradelock">
-                <font-awesome-icon icon="fa-solid fa-lock" class="icon lock" />
-                <span>{{ timeLeft() }}</span>
-            </div>
+        </div>
+        <div class="footer">
             <div class="actions">
-                <button class="btn red" v-if="item.status === 0" @click="changeStatus">
-                    <font-awesome-icon icon="fa-solid fa-lock" class="icon lock" />
+                <button class="btn lock" v-if="item.status === 0" @click="changeStatus">
+                    <img src="@/assets/icon/lock.svg" alt="lock" />
                     Lock
                 </button>
-                <button class="btn green" v-if="item.status === 1" @click="changeStatus">
-                    <font-awesome-icon icon="fa-solid fa-lock-open" class="icon lock" />
+                <button class="btn unlock" v-if="item.status === 1" @click="changeStatus">
+                    <img src="@/assets/icon/unlock.svg" alt="unlock" />
                     Unlock
                 </button>
+            </div>
+            <div class="tradelock" v-if="item.tradelock">
+                <img class="tradelock-icon" src="@/assets/icon/lock.svg" alt="lock" />
+                <span>{{ timeLeft() }}</span>
             </div>
         </div>
     </div>
@@ -61,24 +57,12 @@ export default {
     props: {
         item: {}
     },
-    data() {
-        return {
-            sell_percent: null
-        }
-    },
-    mounted() {
-        this.getSellPercent()
-    },
     methods: {
         getImageUrl() {
             return `https://community.cloudflare.steamstatic.com/economy/image/${this.item.icon_url}`;
         },
         formatCoins(value) {
             return (value/100).toFixed(2)
-        },
-        formattedUpdatedAt() {
-            const updated = moment(this.item.updatedAt);
-            return updated.format("DD/MM/YYYY HH:mm:ss");
         },
         timeLeft() {
             if (!this.item.tradelock) {
@@ -114,27 +98,9 @@ export default {
                 }
             });
         },
-        async getSellPercent() {
-            if (!this.item.purchase_date) {
-                this.sell_percent = null;
-                return null;
-            }
-            const configStore = useConfigStore();
-            const purchaseDate = moment(this.item.purchase_date)
-            const now = moment();
-            const days = now.diff(purchaseDate, "days");
-            const profitPercent = await configStore.getValue("profit_percent");
-            const cycles = Math.floor(days/7)-1;
-            if (cycles < 0) {
-                this.sell_percent = null;
-                return null;
-            }
-            this.sell_percent = profitPercent - (cycles * 2);
-        },
         copyMarketName(event) {
-            var copyText = event.target.closest(".head").querySelector(".name");
-            var textArea = document.createElement("textarea");
-            textArea.value = copyText.textContent;
+            let textArea = document.createElement("textarea");
+            textArea.value = event.target.textContent;
             document.body.appendChild(textArea);
             textArea.select();
             document.execCommand("Copy");
@@ -143,11 +109,7 @@ export default {
     },
     computed: {
         sell_price() {
-            if (!this.sell_percent) {
-                return null;
-            }
-            const basePrice = (this.item.market_value > this.item.purchase_value)? this.item.market_value : this.item.purchase_value;
-            return this.formatCurrency(basePrice + ((basePrice * this.sell_percent)/100));
+            return this.formatCurrency(this.item.purchase_value + ((this.item.purchase_value * 10)/100));
         }
     }
 }
@@ -159,87 +121,99 @@ export default {
     align-items: center;
 }
 .item-wrapper {
-    background-color: #383838;
-    width: 300px;
+    background-color: var(--primary-5);
+    //width: 280px;
     padding: 20px;
-    border-radius: 8px;
+    border-radius: 4px;
+    color: var(--primary);
 }
 .item-wrapper .name {
-    white-space: nowrap;
-    overflow: hidden;
-    display: block;
-    text-overflow: ellipsis;
     font-weight: bold;
+    width: 100%;
+    min-height: 50px;
+    font-size: 16px;
+    margin-bottom: 5px;
 }
-.item-wrapper .head {
+.item-wrapper .content {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    flex-wrap: wrap;
+    margin-bottom: 10px;
+    font-size: 13px;
 }
-.item-wrapper .head .copy {
+.item-wrapper .content .copy {
     margin-left: 10px;
     cursor: pointer;
 }
-.content .image {
+.tradelock {
+    display: flex;
+    align-items: center;
+    font-size: 13px;
+    padding-right: 15px;
+}
+.tradelock .tradelock-icon {
+    filter: var(--svg-white);
+    height: 13px;
+    padding-right: 5px;
+}
+.content .info {
+    width: 100%;
+    display: flex;
+    align-items: center;
+}
+.content .info > div {
+    padding-right: 15px;
+    display: flex;
+    align-items: center;
+}
+.content .info > div > img {
+    padding-right: 3px;
+    height: 13px;
+    filter: var(--svg-white);
+}
+.content .info > div:last-child {
+    padding-right: unset;
+}
+.head .image {
     display: flex;
     justify-content: center;
     padding: 5px 0;
 }
-.content .image img {
+.head .image img {
     height: 150px;
 }
 .item-wrapper.not-tradable {
-    background-color: rgba(20,20,25,1);
+    background-color: var(--secondary-5);
 }
 .footer {
-    height: 80px;
-}
-.footer .tradelock {
-    position: absolute;
-    top: -30px;
-    right: 0px;
-}
-.footer .info {
     display: flex;
-
+    align-items: center;
+    justify-content: space-between;
 }
-.footer .info > div {
-    margin-right: 10px;
+.btn.lock {
+    width: 105px;
+    background-color: var(--secondary);
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
-.footer .info > div:last-child {
-    margin-right: unset;
+.btn.lock img {
+    padding-right: 3px;
+    filter: var(--svg-white);
 }
-.icon.coins,
-.icon.lock,
-.icon.wallet,
-.icon.credit-card {
-    color: #daa520;
-    padding-right: 5px;
+.btn.unlock {
+    width: 105px;
+    background-color: var(--primary-6);
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
-.btn.green {
-    border-color: green;
-    color: green;
-}
-.btn.red {
-    border-color: red;
-    color: red;
-}
-.actions {
-    position: absolute;
-    bottom: 0px;
-    left: 0px;
-}
-.updated {
-    position: absolute;
-    bottom: 0px;
-    right: 0px;
-}
-.sell_value {
-
-}
-.sell_value .percent::before {
-    content: "-";
-    padding: 0 5px;
+.btn.unlock img {
+    padding-right: 3px;
+    filter: var(--svg-white);
 }
 @media only screen and (max-width: 450px) {
     .item-wrapper {

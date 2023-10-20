@@ -48,7 +48,7 @@
   --svg-secondary-5: invert(12%) sepia(26%) saturate(2698%) hue-rotate(305deg) brightness(90%) contrast(96%);
   --svg-secondary-6: invert(5%) sepia(30%) saturate(3295%) hue-rotate(311deg) brightness(97%) contrast(97%);
 
-  --svg-white: invert(100%) sepia(100%) saturate(0%) hue-rotate(288deg) brightness(102%) contrast(102%);
+  --svg-white: invert(100%) sepia(100%) saturate(0%) hue-rotate(288deg) brightness(150%) contrast(102%);
 }
 
 /* semantic color variables for this project */

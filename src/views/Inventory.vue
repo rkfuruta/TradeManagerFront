@@ -88,9 +88,9 @@ export default {
     font-size: 13px;
 }
 .items-wrapper {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 15px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    grid-gap: 20px;
 }
 @media only screen and (max-width: 450px) {
     .inventory-item-container {
