@@ -122,7 +122,6 @@ export default {
 }
 .item-wrapper {
     background-color: var(--primary-5);
-    //width: 280px;
     padding: 20px;
     border-radius: 4px;
     color: var(--primary);
