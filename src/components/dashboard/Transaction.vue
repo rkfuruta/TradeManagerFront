@@ -4,10 +4,7 @@
             <div class="index">{{row}}</div>
             <a :href="steamUrl()" target="_blank">{{ transaction.market_name }}</a>
         </div>
-        <div class="tradelock" v-if="transaction.tradelock">
-            <font-awesome-icon icon="fa-solid fa-lock" class="icon lock" />
-            {{ timeLeft() }}
-        </div>
+        <TradeLockTimer :date="transaction.tradelock"></TradeLockTimer>
     </td>
     <td>
         <div class="purchase value">
@@ -32,6 +29,7 @@
 <script setup>
 import Currency from "@/components/Currency.vue";
 import Date from "@/components/Date.vue";
+import TradeLockTimer from "@/components/TradeLockTimer.vue";
 </script>
 <script>
 import moment from "moment-timezone";
@@ -61,28 +59,6 @@ export default {
                 return sDate.diff(pDate, "days");
             }
         },
-        timeLeft() {
-            if (!this.transaction.tradelock) {
-                return null;
-            }
-            const now = moment();
-            const tradelock = moment(this.transaction.tradelock);
-            let days = tradelock.diff(now, "days");
-            let hours = tradelock.diff(now, "hours");
-            let minutes = tradelock.diff(now, "minutes");
-            minutes = minutes - (hours*60);
-            if (minutes < 0) {
-                this.transaction.tradelock = null;
-                return null;
-            }
-            hours = hours - (days*24)
-            if (minutes > 0 && hours > 0) {
-                hours++;
-            } else {
-                return `${minutes}M`;
-            }
-            return `${days}D ${hours}H`;
-        },
         hasProfit() {
             return (this.transaction.sell_value - this.transaction.purchase_value) > 0;
         }
@@ -103,6 +79,9 @@ export default {
 .item.name .name {
     display: flex;
 }
+.item.name .trade-lock-timer {
+    margin-right: 10px;
+}
 .item.name .name .index {
     font-weight: bold;
     padding-right: 10px;
@@ -111,13 +90,5 @@ export default {
     color: rgba(235, 235, 235, 0.64);
     text-decoration: none;
     font-weight: bold;
-}
-.item.name .tradelock {
-    margin-right: 10px;
-}
-.icon.coins,
-.icon.lock {
-    color: #daa520;
-    padding-right: 5px;
 }
 </style>

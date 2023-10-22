@@ -36,15 +36,13 @@
                     Unlock
                 </button>
             </div>
-            <div class="tradelock" v-if="item.tradelock">
-                <img class="tradelock-icon" src="@/assets/icon/lock.svg" alt="lock" />
-                <span>{{ timeLeft() }}</span>
-            </div>
+            <TradeLockTimer :date="item.tradelock" />
         </div>
     </div>
 </template>
 <script setup>
 import Currency from "@/components/Currency.vue";
+import TradeLockTimer from "@/components/TradeLockTimer.vue";
 </script>
 <script>
 import moment from 'moment';
@@ -62,24 +60,6 @@ export default {
         },
         formatCoins(value) {
             return (value/100).toFixed(2)
-        },
-        timeLeft() {
-            if (!this.item.tradelock) {
-                return null;
-            }
-            const now = moment();
-            const tradelock = moment(this.item.tradelock);
-            let days = tradelock.diff(now, "days");
-            let hours = tradelock.diff(now, "hours");
-            let minutes = tradelock.diff(now, "minutes");
-            minutes = minutes - (hours*60);
-            hours = hours - (days*24)
-            if (minutes > 0 && hours > 0) {
-                hours++;
-            } else {
-                return `${minutes}M`;
-            }
-            return `${days}D ${hours}H`;
         },
         changeStatus() {
             const userStore = useUserStore();
@@ -145,13 +125,13 @@ export default {
     margin-left: 10px;
     cursor: pointer;
 }
-.tradelock {
+.trade-lock-timer {
     display: flex;
     align-items: center;
     font-size: 13px;
     padding-right: 15px;
 }
-.tradelock .tradelock-icon {
+.trade-lock-timer img {
     filter: var(--svg-white);
     height: 13px;
     padding-right: 5px;
