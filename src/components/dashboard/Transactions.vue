@@ -219,6 +219,7 @@ export default {
 .transaction-wrapper {
     width: 100%;
     min-width: 1200px;
+    border-collapse: collapse;
 }
 .transaction-wrapper tr th {
     font-weight: bold;
@@ -260,6 +261,9 @@ export default {
     align-items: center;
     justify-content: center;
     font-weight: bold;
+}
+.transaction-wrapper tr:nth-child(even) {
+    background-color: var(--color-background-soft);
 }
 @media only screen and (max-width: 450px) {
     .statistics {
