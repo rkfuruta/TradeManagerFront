@@ -125,13 +125,13 @@ export default {
     margin-left: 10px;
     cursor: pointer;
 }
-.trade-lock-timer {
+.item-wrapper .footer .trade-lock-timer {
     display: flex;
     align-items: center;
     font-size: 13px;
     padding-right: 15px;
 }
-.trade-lock-timer img {
+.item-wrapper .footer .trade-lock-timer img {
     filter: var(--svg-white);
     height: 13px;
     padding-right: 5px;
