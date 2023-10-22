@@ -25,12 +25,13 @@
         </div>
     </td>
     <td>{{ getProfitPercent() }}</td>
-    <td>{{ formatDate(transaction.purchase_date) }}</td>
-    <td>{{ formatDate(transaction.sell_date) }}</td>
+    <td><Date :date="transaction.purchase_date" /></td>
+    <td><Date :date="transaction.sell_date" /></td>
     <td>{{ getSellingDays() }}</td>
 </template>
 <script setup>
 import Currency from "@/components/Currency.vue";
+import Date from "@/components/Date.vue";
 </script>
 <script>
 import moment from "moment-timezone";
