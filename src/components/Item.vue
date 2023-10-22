@@ -131,6 +131,7 @@ export default {
     min-height: 50px;
     font-size: 16px;
     margin-bottom: 5px;
+    cursor: pointer;
 }
 .item-wrapper .content {
     display: flex;
