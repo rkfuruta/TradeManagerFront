@@ -11,7 +11,7 @@
                 </button>
             </div>
             <div class="updated-at">
-<!--                <Date class="date" :date="updated_at"></Date>-->
+                <Date class="date" :date="updated_at"></Date>
             </div>
         </div>
         <div class="items-wrapper" v-if="inventory && inventory.items">

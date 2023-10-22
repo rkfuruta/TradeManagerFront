@@ -1,6 +1,6 @@
 <template>
     <div>
-        <span>{{ getDate() }}</span>
+        <span>{{ formatted }}</span>
     </div>
 </template>
 <script>
@@ -25,8 +25,8 @@ export default {
             default: "DD/MM/YYYY HH:mm:ss"
         }
     },
-    methods: {
-        getDate() {
+    computed: {
+        formatted() {
             if (!this.date) {
                 return "";
             }
