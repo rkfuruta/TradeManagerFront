@@ -51,7 +51,6 @@ import moment from 'moment';
 import axios from 'axios';
 import { useUserStore } from '@/stores/user';
 import { useInventoryStore } from '@/stores/inventory';
-import { useConfigStore } from '@/stores/config';
 
 export default {
     props: {
